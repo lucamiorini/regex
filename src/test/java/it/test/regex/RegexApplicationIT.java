@@ -53,7 +53,8 @@ class RegexApplicationIT {
         return Stream.of(
                 Arguments.of(List.of("1ABC")),
                 Arguments.of(List.of("A1-BC")),
-                Arguments.of(List.of("ABC-1"))
+                Arguments.of(List.of("ABC-1")),
+                Arguments.of(List.of("ABC| 1"))
         );
     }
 

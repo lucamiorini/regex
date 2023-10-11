@@ -34,7 +34,7 @@ public class RegexService {
      */
     private LinkedList<RegexGroup> calculateRegexFromString(String inputCode, LinkedList<RegexGroup> previousGroupList) {
 
-        if (!inputCode.matches("([A-Z])([A-Z || \\d]*)")) {
+        if (!inputCode.matches("([A-Z])([A-Z\\d]*)")) {
             throw new IllegalArgumentException("Invalid input");
         }
 
