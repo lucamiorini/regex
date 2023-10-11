@@ -51,7 +51,17 @@ public class RegexService {
                 });
 
         stateMachine.sendEvent(EventEnum.END_EVENT);
-        return (LinkedList<RegexGroup>) stateMachine.getExtendedState().getVariables().get(Constants.CURRENT_GROUPS);
+        LinkedList<RegexGroup> regexGroups = (LinkedList<RegexGroup>) stateMachine.getExtendedState().getVariables().get(Constants.CURRENT_GROUPS);
+
+        if (previousGroupList.size() > regexGroups.size()) {
+            for (int i = regexGroups.size(); i < previousGroupList.size(); i++) {
+                RegexGroup regexGroup = previousGroupList.get(i);
+                regexGroup.setMinOccurencies(0);
+                regexGroups.add(regexGroup);
+            }
+        }
+
+        return regexGroups;
     }
 
     private boolean isNumeric(String strNum) {

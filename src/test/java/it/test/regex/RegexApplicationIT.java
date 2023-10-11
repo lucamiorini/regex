@@ -39,7 +39,13 @@ class RegexApplicationIT {
                 Arguments.of(List.of("AB123ZZ", "BB742TG", "CF678HG"), "[A-Z]{2}\\d{3}[A-Z]{2}"),
                 Arguments.of(List.of("TNTTST80A01F205E", "MRNLCU83E20L872L"), "[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]"),
                 Arguments.of(List.of("AA123", "ABC123", "BA1234", "AB12345"), "[A-Z]{2,3}\\d{3,5}"),
-                Arguments.of(List.of("A123XY", "BA1234ZT", "AB12345B"), "[A-Z]{1,2}\\d{3,5}[A-Z]{1,2}")
+                Arguments.of(List.of("A123XY", "BA1234ZT", "AB12345B"), "[A-Z]{1,2}\\d{3,5}[A-Z]{1,2}"),
+                Arguments.of(List.of("AA123", "ABC123", "BA1234AA", "AB12345"), "[A-Z]{2,3}\\d{3,5}[A-Z]{0,2}"),
+                Arguments.of(List.of("AA123", "ABC123", "AB12345", "BA1234AA"), "[A-Z]{2,3}\\d{3,5}[A-Z]{0,2}"),
+                Arguments.of(List.of("BA1234AA", "AA123", "ABC123", "AB12345"), "[A-Z]{2,3}\\d{3,5}[A-Z]{0,2}"),
+                Arguments.of(List.of("AA123", "ABC123", "BA1234", "AB12345", "AA"), "[A-Z]{2,3}\\d{0,5}"),
+                Arguments.of(List.of("AA", "AA123", "ABC123", "BA1234", "AB12345"), "[A-Z]{2,3}\\d{0,5}"),
+                Arguments.of(List.of("AA123", "ABC123", "AA", "BA1234", "AB12345"), "[A-Z]{2,3}\\d{0,5}")
         );
     }
 

@@ -112,12 +112,19 @@ public class StateMachineConfiguration extends StateMachineConfigurerAdapter<Sta
 
             //check which is the min and max values between the current and the previous input code in the same position
             if (previousResultList.size() > 0) {
-                RegexGroup previousResultAtCurrentPosition = previousResultList.get(currentResult.size() - 1);
-                if (last.getMaxOccurencies() < previousResultAtCurrentPosition.getMaxOccurencies()) {
-                    last.setMaxOccurencies(previousResultAtCurrentPosition.getMaxOccurencies());
-                }
-                if (last.getMinOccurencies() > previousResultAtCurrentPosition.getMinOccurencies()) {
-                    last.setMinOccurencies(previousResultAtCurrentPosition.getMinOccurencies());
+                if(previousResultList.size() < currentResult.size()){
+                    //the last group of the current input code is not present in other codes.
+                    //we need to add it with a min occurrences 0
+                    RegexGroup currentResultLast = currentResult.getLast();
+                    currentResultLast.setMinOccurencies(0);
+                }else{
+                    RegexGroup previousResultAtCurrentPosition = previousResultList.get(currentResult.size() - 1);
+                    if (last.getMaxOccurencies() < previousResultAtCurrentPosition.getMaxOccurencies()) {
+                        last.setMaxOccurencies(previousResultAtCurrentPosition.getMaxOccurencies());
+                    }
+                    if (last.getMinOccurencies() > previousResultAtCurrentPosition.getMinOccurencies()) {
+                        last.setMinOccurencies(previousResultAtCurrentPosition.getMinOccurencies());
+                    }
                 }
             }
         };
